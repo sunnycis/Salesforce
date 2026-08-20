@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salesforce Raodmap Pitch (Cheat) Sheet — BD Reference</title>
+<style>
+:root{
+  --ink:#1C2733; --ink-soft:#4A5768; --paper:#EEEBE3; --card:#FBFAF7;
+  --navy:#1D3557; --navy-deep:#12233D; --gold:#A9762F; --gold-soft:#E7D9BE;
+  --line:#D9D3C6; --green:#2F6B4F; --green-soft:#DDEBE2;
+  --orange:#A85D24; --orange-soft:#F1DFD0; --blue-soft:#DCE6F2; --radius:3px;
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:48px 28px 70px}
+header.page-head{border-bottom:2px solid var(--navy);padding-bottom:24px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.eyebrow{font-family:"Helvetica Neue",Arial,sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:11px;color:var(--gold);font-weight:700;margin:0 0 10px}
+h1{font-size:34px;margin:0 0 8px;color:var(--navy-deep);font-weight:600;letter-spacing:-.01em}
+.subhead{font-family:"Helvetica Neue",Arial,sans-serif;color:var(--ink-soft);font-size:14.5px;max-width:650px}
+.howto{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12.5px;color:var(--ink-soft);text-align:right;line-height:1.55;min-width:260px}
+.howto b{color:var(--navy)}
+.legend{margin:22px 0 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--ink-soft)}
+.toolbar{margin:26px 0 22px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#search{font-family:"Helvetica Neue",Arial,sans-serif;font-size:14px;padding:11px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);width:100%;max-width:520px;color:var(--ink)}
+#search:focus{outline:2px solid var(--navy);outline-offset:1px}
+.count{font-family:"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius);padding:20px 22px;transition:opacity .15s ease}
+.card.hidden{display:none}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.cat{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:700;margin:0}
+.badge{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;padding:4px 7px;border-radius:3px;white-space:nowrap}
+.badge.aligned{background:var(--green-soft);color:var(--green)}
+.badge.common{background:var(--blue-soft);color:var(--navy)}
+.badge.trending{background:var(--orange-soft);color:var(--orange)}
+.card h2{font-size:18px;margin:0 0 13px;color:var(--navy-deep);font-weight:600;line-height:1.3}
+.block{margin-bottom:13px} .block:last-child{margin-bottom:0}
+.label{font-family:"Helvetica Neue",Arial,sans-serif;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin:0 0 5px;font-weight:600}
+.trigger{font-style:italic;color:var(--ink-soft);font-size:14px;margin:0}
+.pitch{background:var(--gold-soft);border-radius:var(--radius);padding:11px 13px;font-size:15px;color:var(--navy-deep);font-weight:600;margin:0}
+.probe{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13.5px;color:var(--ink-soft);margin:0}
+footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;color:var(--ink-soft)}
+@media print{
+ body{background:#fff} .toolbar{display:none} .wrap{padding:18px}
+ .grid{grid-template-columns:1fr 1fr;gap:9px} .card{break-inside:avoid;padding:13px 15px}
+ .card h2{font-size:14.5px} .pitch{font-size:12.5px;padding:7px 9px}
+ .trigger{font-size:12px} .probe{font-size:11.5px} header.page-head{padding-bottom:13px}
+ .legend{margin-top:10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="page-head">
+  <div>
+    <p class="eyebrow">Business Development · Quick Reference</p>
+    <h1>Salesforce Roadmap Pitch (Cheat) Sheet</h1>
+  </div>
+  <div class="howto"><b></div>
+</header>
+
+<div class="legend">
+  <span>Badge:</span>
+  <span class="badge aligned">CV ALIGNED</span><span>Existing capability / safest pitch</span>
+  <span class="badge common">COMMON</span><span>Normal Salesforce opportunity</span>
+  <span class="badge trending">TRENDING</span><span>Newer area — qualify before committing</span>
+</div>
+
+<div class="toolbar">
+  <input type="text" id="search" placeholder='Search a keyword, e.g. "email", "AI", "ERP", "portal", "reports"…' oninput="filterCards()">
+  <!-- <span class="count" id="count">37 cards</span> -->
+</div>
+
+<div class="grid" id="grid">
+
+    <div class="card" data-text="connecting systems integration website erp software data sync api">
+      <div class="card-top">
+        <p class="cat">Systems &amp; integration</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Connecting Salesforce to their other systems</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our sales data lives in Salesforce but our website / app doesn&#x27;t update it automatically."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We connect Salesforce to your website or other business systems so data flows automatically — no manual re-entry."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">What other software does your team use every day?</p>
+      </div>
+    </div>
+    <div class="card" data-text="leads website form capture sales inquiries auto assign">
+      <div class="card-top">
+        <p class="cat">Lead capture</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Auto-capturing leads from their website</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our sales team manually adds website inquiries into Salesforce."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We make every website form submission instantly become a Salesforce lead, auto-assigned to the right salesperson."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How do new inquiries currently reach your sales team?</p>
+      </div>
+    </div>
+    <div class="card" data-text="email parsing automation records manual typing orders support tickets">
+      <div class="card-top">
+        <p class="cat">Automation</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Turning incoming emails into Salesforce records automatically</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We get customer requests by email and someone manually logs them."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can automate repetitive email-driven processes so the right Salesforce records are created and routed without manual typing."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Do you get repetitive email requests — orders, support tickets, applications?</p>
+      </div>
+    </div>
+    <div class="card" data-text="dashboards reports leadership manual weekly export excel">
+      <div class="card-top">
+        <p class="cat">Reporting</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Dashboards and reports leadership can actually use</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our managers ask someone to export data and build a report every week."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We build live dashboards so your leadership sees up-to-date numbers anytime, with no manual report-building."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Does anyone spend hours building the same report every week?</p>
+      </div>
+    </div>
+    <div class="card" data-text="security access control permissions sensitive data roles profiles">
+      <div class="card-top">
+        <p class="cat">Data security</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Locking down who can see or edit what</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Everyone in Salesforce can see everything, even sensitive customer or financial data."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can review and configure Salesforce access controls so users see and edit only the information appropriate to their role."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Do different teams need different levels of access?</p>
+      </div>
+    </div>
+    <div class="card" data-text="quotes pricing cpq sales reps excel word discounts approvals">
+      <div class="card-top">
+        <p class="cat">Sales operations</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Automating quotes and pricing (CPQ)</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our sales reps build quotes manually in Excel or Word and mistakes happen."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can streamline quoting, pricing and approval steps so sales teams can create accurate quotes faster."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Do you sell products or services with complex pricing or approval steps?</p>
+      </div>
+    </div>
+    <div class="card" data-text="custom tools screens workflow out of the box spreadsheets workarounds">
+      <div class="card-top">
+        <p class="cat">Custom build</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Custom tools inside Salesforce for their exact workflow</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Salesforce doesn&#x27;t do this the way our business needs it to."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We build custom Salesforce features tailored to your exact process when standard functionality isn&#x27;t enough."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Are you working around Salesforce&#x27;s limits with spreadsheets or manual steps?</p>
+      </div>
+    </div>
+    <div class="card" data-text="data migration cleanup duplicates switching systems import">
+      <div class="card-top">
+        <p class="cat">Data quality</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Cleaning up and migrating messy data</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We have duplicate or messy data in Salesforce, or we&#x27;re moving from another system."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We clean, transform and migrate data into Salesforce so records are reliable and usable."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Are you switching to Salesforce, or hearing complaints about data quality?</p>
+      </div>
+    </div>
+    <div class="card" data-text="implementation new salesforce crm setup go live configuration">
+      <div class="card-top">
+        <p class="cat">Implementation</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Implementing Salesforce for a new business</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We&#x27;re considering Salesforce but don&#x27;t know where to start."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can help translate your sales or service processes into a Salesforce implementation, from setup through go-live."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">What are you using today to manage customers, sales or service?</p>
+      </div>
+    </div>
+    <div class="card" data-text="sales cloud sales process leads opportunities pipeline crm">
+      <div class="card-top">
+        <p class="cat">Sales Cloud</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Improving the sales process in Salesforce</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our salespeople aren&#x27;t following a consistent sales process."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can configure Salesforce around your sales stages, lead handling, opportunity tracking and management reporting."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How do leads move from first contact to closed business today?</p>
+      </div>
+    </div>
+    <div class="card" data-text="service cloud customer support cases complaints tickets service">
+      <div class="card-top">
+        <p class="cat">Service Cloud</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Improving customer support and case management</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our support team struggles to track customer issues and follow-ups."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can organize customer service in Salesforce so cases, ownership, priorities and follow-ups are easier to manage."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How are customer complaints and support requests tracked today?</p>
+      </div>
+    </div>
+    <div class="card" data-text="lead opportunity conversion qualification handoff marketing sales">
+      <div class="card-top">
+        <p class="cat">Lead-to-opportunity</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Making the sales handoff consistent</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Leads are being lost between marketing and sales."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can design a consistent lead qualification and handoff process so sales teams know what needs attention and when."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Where do leads get stuck or lost today?</p>
+      </div>
+    </div>
+    <div class="card" data-text="pipeline forecasting opportunities stages sales forecast management">
+      <div class="card-top">
+        <p class="cat">Pipeline management</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Giving managers visibility into the sales pipeline</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our managers don&#x27;t trust the pipeline numbers."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can improve opportunity stages, required information and dashboards so pipeline reporting becomes more reliable."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How do managers currently forecast and review opportunities?</p>
+      </div>
+    </div>
+    <div class="card" data-text="approvals discounts special deals workflow management">
+      <div class="card-top">
+        <p class="cat">Approvals</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Automating business approvals</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Discounts or special deals have to be approved over email."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can automate approval steps in Salesforce so requests reach the right approver and remain traceable."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Which sales or service decisions currently require email approvals?</p>
+      </div>
+    </div>
+    <div class="card" data-text="notifications reminders followups tasks alerts automation">
+      <div class="card-top">
+        <p class="cat">Notifications</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Automating reminders and follow-ups</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our team forgets to follow up with customers."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can automate reminders, notifications and follow-up tasks based on business events."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Which customer or sales follow-ups are currently tracked manually?</p>
+      </div>
+    </div>
+    <div class="card" data-text="admin administration users support configuration changes">
+      <div class="card-top">
+        <p class="cat">User administration</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Ongoing Salesforce administration</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We need someone to handle Salesforce changes and user requests."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can provide Salesforce administration support for users, configuration changes, troubleshooting and day-to-day enhancements."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How do you currently handle Salesforce admin requests?</p>
+      </div>
+    </div>
+    <div class="card" data-text="enhancement backlog small changes support maintenance">
+      <div class="card-top">
+        <p class="cat">Enhancements</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>A Salesforce enhancement backlog</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We have lots of small Salesforce changes but no one has time to do them."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can work through your Salesforce enhancement backlog in a structured support model instead of letting small improvements pile up."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Do you have a backlog of Salesforce changes or fixes?</p>
+      </div>
+    </div>
+    <div class="card" data-text="optimization audit assessment underused adoption improvement">
+      <div class="card-top">
+        <p class="cat">Optimization</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Reviewing an underused Salesforce org</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We bought Salesforce but we&#x27;re not getting enough value from it."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can assess your current Salesforce setup and identify opportunities to simplify processes, improve adoption and automate manual work."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Which parts of Salesforce are your users not using effectively?</p>
+      </div>
+    </div>
+    <div class="card" data-text="testing uat quality assurance regression deployment">
+      <div class="card-top">
+        <p class="cat">Testing</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Salesforce testing and UAT support</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Changes keep breaking something else in Salesforce."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can help create test scenarios and support UAT so Salesforce changes are validated before release."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Do you have a formal testing process before Salesforce changes go live?</p>
+      </div>
+    </div>
+    <div class="card" data-text="deployment release production changes dev test">
+      <div class="card-top">
+        <p class="cat">Deployment</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Managing Salesforce releases</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We are nervous about moving changes into production."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can support controlled Salesforce deployments with validation, testing and release coordination."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How are Salesforce changes moved from development into production?</p>
+      </div>
+    </div>
+    <div class="card" data-text="legacy modernization old customization technical debt">
+      <div class="card-top">
+        <p class="cat">Legacy modernization</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Modernizing an older Salesforce implementation</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our Salesforce setup has accumulated years of old customizations."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can review legacy customizations and identify opportunities to simplify and modernize the org."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How old is your Salesforce implementation, and how much legacy automation is still in it?</p>
+      </div>
+    </div>
+    <div class="card" data-text="erp integration orders customer data accounting backend">
+      <div class="card-top">
+        <p class="cat">ERP integration</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Connecting Salesforce with an ERP</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our sales team enters the same customer or order information in Salesforce and our ERP."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can integrate Salesforce with your ERP so key customer, order and business data can move between systems automatically."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Which ERP or back-office system needs to exchange data with Salesforce?</p>
+      </div>
+    </div>
+    <div class="card" data-text="accounting finance integration billing invoice payments">
+      <div class="card-top">
+        <p class="cat">Accounting integration</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Connecting Salesforce with finance systems</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Sales has information in Salesforce but finance has to re-enter it elsewhere."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can connect Salesforce with finance or accounting systems to reduce duplicate entry and improve data consistency."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Where does finance get customer, order or billing information today?</p>
+      </div>
+    </div>
+    <div class="card" data-text="ecommerce online store orders customers website integration">
+      <div class="card-top">
+        <p class="cat">E-commerce integration</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Connecting Salesforce to an online store</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Online orders and customer information aren&#x27;t reaching our sales team."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can connect e-commerce activity with Salesforce so customer and order information is available to the right teams."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Do you have an online store or customer-facing application that needs to exchange data with Salesforce?</p>
+      </div>
+    </div>
+    <div class="card" data-text="api integration web services rest external applications systems">
+      <div class="card-top">
+        <p class="cat">API integration</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Building Salesforce API integrations</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We have another application that needs to exchange information with Salesforce."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can design and implement API-based integrations so Salesforce can exchange data with your existing applications."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Which systems need to send or receive Salesforce data?</p>
+      </div>
+    </div>
+    <div class="card" data-text="data synchronization customer master source truth systems">
+      <div class="card-top">
+        <p class="cat">Data synchronization</p>
+        <span class="badge aligned">CV ALIGNED</span>
+      </div>
+      <h2>Keeping customer data synchronized</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Customer information is different in different systems."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can define and automate data synchronization rules so important customer information stays consistent across systems."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Which system should be the source of truth for customer information?</p>
+      </div>
+    </div>
+    <div class="card" data-text="experience cloud customer portal self service support login">
+      <div class="card-top">
+        <p class="cat">Customer portal</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Giving customers self-service access</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Customers keep contacting support to ask for basic information."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can create a customer self-service experience where customers can access relevant information and submit requests online."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">What information or services do customers repeatedly ask your support team for?</p>
+      </div>
+    </div>
+    <div class="card" data-text="experience cloud partner portal dealers distributors channel">
+      <div class="card-top">
+        <p class="cat">Partner portal</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Giving partners controlled access</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our dealers or partners need information from us but we don&#x27;t want to give them internal access."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can create a secure partner experience with controlled access to the information and processes partners need."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">What do partners currently request from your internal team?</p>
+      </div>
+    </div>
+    <div class="card" data-text="knowledge self service faq support customer questions">
+      <div class="card-top">
+        <p class="cat">Knowledge &amp; self-service</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Reducing repetitive support questions</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our support team answers the same questions again and again."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can organize customer knowledge and self-service processes so common questions can be handled more efficiently."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">What are the top questions your support team answers repeatedly?</p>
+      </div>
+    </div>
+    <div class="card" data-text="flow migration workflow rules process builder automation legacy trending">
+      <div class="card-top">
+        <p class="cat">Flow migration</p>
+        <span class="badge trending">TRENDING</span>
+      </div>
+      <h2>Replacing legacy Workflow Rules and Process Builder automation</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We have old Salesforce automation and we&#x27;re worried about maintaining it."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can assess legacy automation and help move appropriate processes to modern Salesforce Flow-based automation."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Do you have older Workflow Rules or Process Builder processes in your Salesforce org?</p>
+      </div>
+    </div>
+    <div class="card" data-text="agentforce ai agents artificial intelligence service sales trending">
+      <div class="card-top">
+        <p class="cat">Agentforce</p>
+        <span class="badge trending">TRENDING</span>
+      </div>
+      <h2>Exploring AI agents for Salesforce</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We want AI to handle some routine customer-service or sales tasks."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can help assess where Salesforce AI agents could reduce repetitive work and identify suitable use cases."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Which customer or sales tasks would you most like AI to handle?</p>
+      </div>
+    </div>
+    <div class="card" data-text="data 360 data cloud unified customer data ai trending">
+      <div class="card-top">
+        <p class="cat">Data 360</p>
+        <span class="badge trending">TRENDING</span>
+      </div>
+      <h2>Bringing customer data together for better Salesforce experiences</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our customer information is spread across multiple systems."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can assess how unified customer data could improve Salesforce reporting, automation and AI use cases."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How many systems contain customer information today?</p>
+      </div>
+    </div>
+    <div class="card" data-text="agentforce data 360 ai unified data governance trending">
+      <div class="card-top">
+        <p class="cat">Agentforce + Data 360</p>
+        <span class="badge trending">TRENDING</span>
+      </div>
+      <h2>Preparing unified customer data for AI use cases</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We want AI, but our customer data is fragmented."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can assess the data foundations needed to make Salesforce AI use cases useful and governed."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Is your customer data centralized, or spread across CRM, ERP, website and other systems?</p>
+      </div>
+    </div>
+    <div class="card" data-text="revenue cloud cpq quoting pricing products contracts trending">
+      <div class="card-top">
+        <p class="cat">Revenue Cloud</p>
+        <span class="badge trending">TRENDING</span>
+      </div>
+      <h2>Modernizing complex quoting and revenue processes</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our products, pricing, bundles or contracts make quoting complicated."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can assess whether Salesforce revenue capabilities can simplify complex product, pricing, quoting and revenue workflows."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">How complicated are your product bundles, pricing rules and approvals?</p>
+      </div>
+    </div>
+    <div class="card" data-text="slack salesforce collaboration notifications workflow trending">
+      <div class="card-top">
+        <p class="cat">Slack + Salesforce</p>
+        <span class="badge trending">TRENDING</span>
+      </div>
+      <h2>Bringing Salesforce work into team collaboration</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our teams keep switching between Salesforce, email and chat to get work done."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can explore ways to surface Salesforce information and actions within team collaboration workflows."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Which customer or sales updates are repeatedly shared manually in chat or email?</p>
+      </div>
+    </div>
+    <div class="card" data-text="ai customer service service cloud automation knowledge trending">
+      <div class="card-top">
+        <p class="cat">AI customer service</p>
+        <span class="badge trending">TRENDING</span>
+      </div>
+      <h2>Using AI to reduce repetitive service work</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"Our support team spends too much time answering repetitive questions."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can assess AI-assisted service opportunities such as response assistance, knowledge access and routine request handling."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">What percentage of support requests are repetitive or predictable?</p>
+      </div>
+    </div>
+    <div class="card" data-text="managed support maintenance retainer monthly admin developer">
+      <div class="card-top">
+        <p class="cat">Managed support</p>
+        <span class="badge common">COMMON</span>
+      </div>
+      <h2>Monthly Salesforce support and maintenance</h2>
+      <div class="block">
+        <p class="label">They might say</p>
+        <p class="trigger">"We don&#x27;t need a full-time Salesforce developer, but we need help regularly."</p>
+      </div>
+      <div class="block">
+        <p class="label">Pitch line</p>
+        <p class="pitch">"We can provide ongoing Salesforce support for fixes, enhancements, administration and small development requests."</p>
+      </div>
+      <div class="block">
+        <p class="label">Ask them</p>
+        <p class="probe">Would a monthly support model be easier than hiring a full-time Salesforce specialist?</p>
+      </div>
+    </div>
+</div>
+
+<footer>
+  For Internal BD reference.
+  <br>Commercial rule: TRENDING opportunities should be qualified and technically validated before promising a specific implementation.
+</footer>
+</div>
+
+<script>
+function filterCards(){
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const cards = document.querySelectorAll('.card');
+  let visible = 0;
+  cards.forEach(c => {
+    const match = !q || c.dataset.text.includes(q) || c.innerText.toLowerCase().includes(q);
+    c.classList.toggle('hidden', !match);
+    if(match) visible++;
+  });
+  document.getElementById('count').textContent = q ? (visible + ' of ' + cards.length + ' shown') : (cards.length + ' cards');
+}
+</script>
+</body>
+</html>
