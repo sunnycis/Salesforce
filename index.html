@@ -42,12 +42,43 @@ h1{font-size:34px;margin:0 0 8px;color:var(--navy-deep);font-weight:600;letter-s
 .pitch{background:var(--gold-soft);border-radius:var(--radius);padding:11px 13px;font-size:15px;color:var(--navy-deep);font-weight:600;margin:0}
 .probe{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13.5px;color:var(--ink-soft);margin:0}
 footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);font-family:"Helvetica Neue",Arial,sans-serif;font-size:11.5px;color:var(--ink-soft)}
+
+/* ===== SOP STYLES ===== */
+.sop-wrapper{margin:40px 0 20px;}
+.sop-toggle{width:100%;background:var(--navy);color:var(--paper);border:none;border-radius:var(--radius);padding:18px 24px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:18px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background 0.2s;}
+.sop-toggle:hover{background:var(--navy-deep);}
+.sop-toggle .icon{font-size:22px;transition:transform 0.3s ease;}
+.sop-toggle .icon.open{transform:rotate(180deg);}
+.sop-content{display:none;background:var(--card);border:1px solid var(--line);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:28px 32px;font-family:"Helvetica Neue",Arial,sans-serif;color:var(--ink);line-height:1.7;}
+.sop-content.open{display:block;}
+.sop-body h1,.sop-body h2,.sop-body h3,.sop-body h4{color:var(--navy-deep);margin-top:28px;margin-bottom:12px;font-weight:600;}
+.sop-body h1{font-size:24px;border-bottom:2px solid var(--gold-soft);padding-bottom:10px;margin-top:0;}
+.sop-body h2{font-size:19px;border-bottom:1px solid var(--line);padding-bottom:6px;}
+.sop-body h3{font-size:16px;}
+.sop-body h4{font-size:14px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold);}
+.sop-body p{margin:8px 0;}
+.sop-body ul,.sop-body ol{padding-left:24px;margin:8px 0;}
+.sop-body li{margin:4px 0;}
+.sop-body table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+.sop-body th,.sop-body td{border:1px solid var(--line);padding:10px 14px;text-align:left;}
+.sop-body th{background:var(--navy);color:var(--paper);font-weight:600;}
+.sop-body td{background:var(--card);}
+.sop-body .badge-sop{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;padding:2px 9px;border-radius:3px;}
+.sop-body .badge-sop.aligned{background:var(--green-soft);color:var(--green);}
+.sop-body .badge-sop.common{background:var(--blue-soft);color:var(--navy);}
+.sop-body .badge-sop.trending{background:var(--orange-soft);color:var(--orange);}
+.sop-body .flowchart{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;font-family:monospace;font-size:12px;white-space:pre;overflow-x:auto;margin:14px 0;line-height:1.6;}
+.sop-body .doc-meta{font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
+.sop-body hr.sop-hr{border:none;border-top:1px solid var(--line);margin:20px 0;}
+
 @media print{
  body{background:#fff} .toolbar{display:none} .wrap{padding:18px}
  .grid{grid-template-columns:1fr 1fr;gap:9px} .card{break-inside:avoid;padding:13px 15px}
  .card h2{font-size:14.5px} .pitch{font-size:12.5px;padding:7px 9px}
  .trigger{font-size:12px} .probe{font-size:11.5px} header.page-head{padding-bottom:13px}
  .legend{margin-top:10px}
+ .sop-toggle{display:none} .sop-content{display:block !important;border:1px solid var(--line);border-radius:var(--radius);padding:20px;}
+ .sop-wrapper{margin:20px 0;}
 }
 </style>
 </head>
@@ -73,6 +104,163 @@ footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);font-fa
   <span class="count" id="count">37 cards</span>
 </div>
 
+<!-- ============================================ -->
+<!-- STANDARD OPERATING PROCEDURE - COLLAPSIBLE   -->
+<!-- ============================================ -->
+<div class="sop-wrapper">
+  <button class="sop-toggle" onclick="toggleSOP()">
+    <span>📋 Standard Operating Procedure — Salesforce Roadmap Pitch (Cheat) Sheet</span>
+    <span class="icon" id="sop-icon">▾</span>
+  </button>
+
+  <div class="sop-content" id="sop-content">
+    <div class="sop-body">
+
+      <p class="doc-meta">
+        <strong>Document ID:</strong> SOP-BD-SALESFORCE-001 &nbsp;|&nbsp;
+        <strong>Version:</strong> 1.0 &nbsp;|&nbsp;
+        <strong>Effective Date:</strong> Aug 26, 2026 &nbsp;|&nbsp;
+        <strong>Owner:</strong> Business Development Lead
+      </p>
+
+      <hr class="sop-hr">
+
+      <!-- 1. PURPOSE -->
+      <h1>1. Purpose</h1>
+      <p>This Standard Operating Procedure defines the process for utilizing the Salesforce Roadmap Pitch (Cheat) Sheet as a business development reference tool. The document serves as a quick-reference guide for BD team members to identify and qualify Salesforce-related opportunities with prospective clients.</p>
+
+      <!-- 2. SCOPE -->
+      <h1>2. Scope</h1>
+      <p>This SOP applies to all Business Development team members, Sales Representatives, and Pre-Sales Consultants who engage with potential Salesforce clients or prospects. The tool is designed for internal use during discovery calls, client meetings, and opportunity qualification.</p>
+
+      <!-- 3. DEFINITIONS -->
+      <h1>3. Key Definitions &amp; Terminology</h1>
+      <table>
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge-sop aligned">CV ALIGNED</span></td><td>Existing capability; safest pitch with proven delivery track record</td></tr>
+          <tr><td><span class="badge-sop common">COMMON</span></td><td>Normal Salesforce opportunity; standard offering</td></tr>
+          <tr><td><span class="badge-sop trending">TRENDING</span></td><td>Newer Salesforce area requiring qualification and technical validation before commitment</td></tr>
+          <tr><td><strong>Trigger</strong></td><td>Common client statement indicating a potential opportunity</td></tr>
+          <tr><td><strong>Pitch Line</strong></td><td>Recommended response to the client's trigger statement</td></tr>
+          <tr><td><strong>Probe</strong></td><td>Question to ask client for deeper qualification</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 4. ROLES -->
+      <h1>4. Roles and Responsibilities</h1>
+      <table>
+        <thead><tr><th>Role</th><th>Responsibility</th></tr></thead>
+        <tbody>
+          <tr><td><strong>BD Team Member</strong></td><td>Uses the cheat sheet during client interactions; updates opportunity tracking</td></tr>
+          <tr><td><strong>Pre-Sales/Technical Consultant</strong></td><td>Assists in qualifying and validating TRENDING opportunities</td></tr>
+          <tr><td><strong>SOP Owner</strong></td><td>Maintains and updates this document; reviews quarterly</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 5. PROCEDURES -->
+      <h1>5. Procedures</h1>
+
+      <h2>5.1 Pre-Meeting Preparation</h2>
+      <ol>
+        <li><strong>Familiarize with the tool:</strong> Review the card categories, badges, and structure before client meetings.</li>
+        <li><strong>Identify likely scenarios:</strong> Based on client research, anticipate which cards may apply.</li>
+        <li><strong>Prepare probing questions:</strong> Review the "Ask them" sections relevant to the prospect.</li>
+      </ol>
+
+      <h2>5.2 During Client Discovery Calls</h2>
+      <ol>
+        <li><strong>Listen for trigger statements:</strong> Match client statements to the "They might say" triggers.</li>
+        <li><strong>Select relevant card:</strong> Identify the corresponding card that addresses the client's statement.</li>
+        <li><strong>Deliver the pitch:</strong> Use the "Pitch line" as a starting point; adapt to the client's specific situation.</li>
+        <li><strong>Ask probing questions:</strong> Use the "Ask them" probe to uncover more details and qualify the opportunity.</li>
+      </ol>
+
+      <h2>5.3 Opportunity Qualification Guidelines</h2>
+      <table>
+        <thead><tr><th>Badge</th><th>Action Required</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge-sop aligned">CV ALIGNED</span></td><td>Proceed with standard proposal; minimal additional validation required</td></tr>
+          <tr><td><span class="badge-sop common">COMMON</span></td><td>Follow standard sales process; moderate qualification needed</td></tr>
+          <tr><td><span class="badge-sop trending">TRENDING</span></td><td><strong>MUST</strong> engage Technical Consultant for validation; assess client readiness; do not overpromise</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 6. CARD CATEGORIES -->
+      <h1>6. Card Categories and Use Cases</h1>
+      <table>
+        <thead><tr><th>Category</th><th>When to Use</th></tr></thead>
+        <tbody>
+          <tr><td>Systems &amp; Integration</td><td>Client mentions connecting Salesforce to other software</td></tr>
+          <tr><td>Lead Capture</td><td>Client discusses manual lead entry</td></tr>
+          <tr><td>Automation</td><td>Client mentions manual repetitive processes</td></tr>
+          <tr><td>Reporting</td><td>Client struggles with manual report generation</td></tr>
+          <tr><td>Data Security</td><td>Client concerned about data visibility and access</td></tr>
+          <tr><td>Sales Operations</td><td>Client mentions quoting or pricing challenges</td></tr>
+          <tr><td>Custom Build</td><td>Client says Salesforce "doesn't do this"</td></tr>
+          <tr><td>Data Quality</td><td>Client mentions duplicates, messy data, or migration</td></tr>
+          <tr><td>Implementation</td><td>New Salesforce consideration</td></tr>
+          <tr><td>Sales Cloud</td><td>Inconsistent sales process</td></tr>
+          <tr><td>Service Cloud</td><td>Support/case management issues</td></tr>
+          <tr><td>Agentforce</td><td>AI handling routine tasks</td></tr>
+          <tr><td>Data 360</td><td>Fragmented customer data</td></tr>
+          <tr><td>Revenue Cloud</td><td>Complex quoting and revenue processes</td></tr>
+          <tr><td>Slack + Salesforce</td><td>Teams switching between Salesforce, email, and chat</td></tr>
+          <tr><td>AI Customer Service</td><td>Repetitive support questions</td></tr>
+          <tr><td>Managed Support</td><td>Ongoing support needs</td></tr>
+        </tbody>
+      </table>
+
+      <!-- 7. SEARCH AND NAVIGATION -->
+      <h1>7. Search and Navigation</h1>
+      <p>The cheat sheet includes a search function that allows users to:</p>
+      <ul>
+        <li><strong>Search by keyword</strong> (e.g., "email", "AI", "ERP", "portal", "reports")</li>
+        <li><strong>Filter cards dynamically</strong> to show only relevant opportunities</li>
+        <li><strong>View card count</strong> to see results matching the search</li>
+      </ul>
+
+      <!-- 8. VERSION HISTORY -->
+      <h1>8. Version History</h1>
+      <table>
+        <thead><tr><th>Version</th><th>Date</th><th>Author</th><th>Changes</th></tr></thead>
+        <tbody>
+          <tr><td>1.0</td><td>Aug 26, 2026</td><td>Development Team</td><td>Initial creation</td></tr>
+        </tbody>
+      </table>
+
+      <!-- APPENDIX A -->
+      <h1>Appendix A: Quick Reference Flowchart</h1>
+      <div class="flowchart">START
+  ↓
+Review client research
+  ↓
+During discovery call → Listen for triggers
+  ↓
+Match to card → Check badge
+  ↓
+┌─────────────────────────────────────────┐
+│ CV ALIGNED    │ COMMON      │ TRENDING │
+│ → Pitch       │ → Pitch     │ → Pitch  │
+│ → Probe       │ → Probe     │ → Probe  │
+│ → Proceed     │ → Proceed   │ → Flag   │
+│   standard    │   standard  │   Tech   │
+│              │              │   Review │
+└─────────────────────────────────────────┘
+  ↓
+Log opportunity in ERP or share with the Technical Team
+  ↓
+Update opportunity status
+  ↓
+END</div>
+
+    </div><!-- end sop-body -->
+  </div><!-- end sop-content -->
+</div><!-- end sop-wrapper -->
+
+<!-- ============================================ -->
+<!-- PITCH CARDS GRID                            -->
+<!-- ============================================ -->
 <div class="grid" id="grid">
 
     <div class="card" data-text="connecting systems integration website erp software data sync api">
@@ -788,14 +976,14 @@ footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);font-fa
 
 <script>
 // ============================================
-// TRACKING CONFIGURATION - UPDATE THESE VALUES
+// SOP TOGGLE FUNCTION
 // ============================================
-const CONFIG = {
-    // Get these from Supabase: Project Settings → API
-    SUPABASE_URL: 'https://pjkrxajkirorhmhymaol.supabase.co', // Your actual URL
-    SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBqa3J4YWpraXJvcmhtaHltYW9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNTg2NjUsImV4cCI6MjA5NjgzNDY2NX0.w2Xh8VrEPr8yTmW_IEVRxESAzlMSxT3sYG5BM1zOlV8', // Your actual anon key
-    TABLE_NAME: 'page_visits'
-};
+function toggleSOP() {
+  const content = document.getElementById('sop-content');
+  const icon = document.getElementById('sop-icon');
+  content.classList.toggle('open');
+  icon.classList.toggle('open');
+}
 
 // ============================================
 // PAGE FILTER FUNCTION
@@ -813,16 +1001,25 @@ function filterCards() {
 }
 
 // ============================================
-// TRACKING CLASS - FIXED VERSION
+// TRACKING CONFIGURATION - UPDATE THESE
+// ============================================
+const CONFIG = {
+    SUPABASE_URL: 'https://pjkrxajkirorhmhymaol.supabase.co',
+    SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBqa3J4YWpraXJvcmhtaHltYW9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNTg2NjUsImV4cCI6MjA5NjgzNDY2NX0.w2Xh8VrEPr8yTmW_IEVRxESAzlMSxT3sYG5BM1zOlV8',
+    TABLE_NAME: 'page_visits'
+};
+
+// ============================================
+// IMPROVED TRACKING CLASS - FIXES ALL ISSUES
 // ============================================
 class PageTracker {
   constructor() {
     this.sessionId = this.getSessionId();
     this.visitCount = this.getVisitCount();
     this.startTime = Date.now();
+    this.firstVisit = this.getFirstVisit();
   }
 
-  // Generate proper UUID v4
   generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
       const r = Math.random() * 16 | 0;
@@ -847,25 +1044,92 @@ class PageTracker {
     return count;
   }
 
+  getFirstVisit() {
+    let firstVisit = localStorage.getItem('tracker_first_visit');
+    if (!firstVisit) {
+      firstVisit = this.getISTTimestamp();
+      localStorage.setItem('tracker_first_visit', firstVisit);
+    }
+    return firstVisit;
+  }
+
+  // ===== FIX: Get IST Timezone (UTC +5:30) =====
+  getISTTimestamp() {
+    const now = new Date();
+    // Convert to IST (UTC +5:30)
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istTime = new Date(now.getTime() + (now.getTimezoneOffset() * 60 * 1000) + istOffset);
+    return istTime.toISOString().replace('Z', '+05:30');
+  }
+
   getDeviceInfo() {
     const ua = navigator.userAgent;
     let deviceType = 'desktop';
+    let deviceModel = 'Unknown';
     let osName = 'Unknown';
     let osVersion = '';
     let browserName = 'Unknown';
     let browserVersion = '';
 
+    // FIX: Better device detection
     if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
-      deviceType = /Tablet|iPad/i.test(ua) ? 'tablet' : 'mobile';
+      if (/Tablet|iPad/i.test(ua)) {
+        deviceType = 'tablet';
+      } else {
+        deviceType = 'mobile';
+      }
     }
 
-    if (/Windows NT 10.0/i.test(ua)) { osName = 'Windows 10'; }
-    else if (/Windows NT 6.1/i.test(ua)) { osName = 'Windows 7'; }
-    else if (/Mac OS X/i.test(ua)) { osName = 'macOS'; }
-    else if (/Android/i.test(ua)) { osName = 'Android'; }
-    else if (/iOS|iPhone|iPad|iPod/i.test(ua)) { osName = 'iOS'; }
+    // FIX: Detect device model
+    if (/iPhone/i.test(ua)) {
+      const match = ua.match(/iPhone OS (\d+_\d+)/);
+      if (match) deviceModel = 'iPhone ' + match[1].replace('_', '.');
+    } else if (/iPad/i.test(ua)) {
+      const match = ua.match(/iPad; CPU OS (\d+_\d+)/);
+      if (match) deviceModel = 'iPad ' + match[1].replace('_', '.');
+    } else if (/Android/i.test(ua)) {
+      const match = ua.match(/Android (\d+\.\d+)/);
+      if (match) deviceModel = 'Android ' + match[1];
+      // Try to get model from user agent
+      const modelMatch = ua.match(/\((.*?)\)/);
+      if (modelMatch && modelMatch[1].includes('Android')) {
+        const parts = modelMatch[1].split(';');
+        if (parts.length > 1) {
+          const modelPart = parts[1].trim();
+          if (modelPart && !modelPart.includes('Android')) {
+            deviceModel = modelPart + ' ' + (deviceModel || '');
+          }
+        }
+      }
+    } else if (/Windows NT/i.test(ua)) {
+      deviceModel = 'Windows PC';
+    } else if (/Mac OS X/i.test(ua)) {
+      deviceModel = 'Mac';
+    }
+
+    // OS detection
+    if (/Windows NT 10.0/i.test(ua)) { osName = 'Windows 10'; osVersion = '10.0'; }
+    else if (/Windows NT 6.1/i.test(ua)) { osName = 'Windows 7'; osVersion = '6.1'; }
+    else if (/Windows NT 6.2/i.test(ua)) { osName = 'Windows 8'; osVersion = '6.2'; }
+    else if (/Windows NT 6.3/i.test(ua)) { osName = 'Windows 8.1'; osVersion = '6.3'; }
+    else if (/Mac OS X/i.test(ua)) { 
+      osName = 'macOS';
+      const match = ua.match(/Mac OS X (\d+[._]\d+)/);
+      if (match) osVersion = match[1].replace('_', '.');
+    }
+    else if (/Android/i.test(ua)) { 
+      osName = 'Android';
+      const match = ua.match(/Android (\d+\.\d+)/);
+      if (match) osVersion = match[1];
+    }
+    else if (/iOS|iPhone|iPad|iPod/i.test(ua)) { 
+      osName = 'iOS';
+      const match = ua.match(/OS (\d+[._]\d+)/);
+      if (match) osVersion = match[1].replace('_', '.');
+    }
     else if (/Linux/i.test(ua)) { osName = 'Linux'; }
 
+    // Browser detection
     if (/Edg/i.test(ua)) {
       browserName = 'Edge';
       const match = ua.match(/Edg\/([\d.]+)/);
@@ -887,6 +1151,7 @@ class PageTracker {
     return {
       user_agent: ua,
       device_type: deviceType,
+      device_model: deviceModel,
       os_name: osName,
       os_version: osVersion,
       browser_name: browserName,
@@ -896,31 +1161,76 @@ class PageTracker {
     };
   }
 
+  // ===== FIX: Better IP/location detection =====
   async getLocationInfo() {
     try {
-      // Using ip-api.com which is more reliable
-      const response = await fetch('https://ip-api.com/json/');
-      if (!response.ok) throw new Error('IP API failed');
-      const data = await response.json();
+      // Try multiple IP services for redundancy
+      let data = null;
       
+      try {
+        // Try ip-api.com first
+        const response = await fetch('https://ip-api.com/json/', {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          data = await response.json();
+          if (data && data.status === 'success') {
+            return {
+              ip_address: data.query || 'Unknown',
+              country: data.country || 'Unknown',
+              region: data.regionName || 'Unknown',
+              city: data.city || 'Unknown',
+              timezone: data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+              latitude: data.lat || null,
+              longitude: data.lon || null,
+              isp: data.isp || 'Unknown'
+            };
+          }
+        }
+      } catch (e) {
+        console.warn('ip-api.com failed, trying fallback...');
+      }
+
+      // Fallback: Use ipinfo.io
+      try {
+        const response = await fetch('https://ipinfo.io/json');
+        if (response.ok) {
+          data = await response.json();
+          const loc = data.loc ? data.loc.split(',') : [null, null];
+          return {
+            ip_address: data.ip || 'Unknown',
+            country: data.country || 'Unknown',
+            region: data.region || 'Unknown',
+            city: data.city || 'Unknown',
+            timezone: data.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+            latitude: parseFloat(loc[0]) || null,
+            longitude: parseFloat(loc[1]) || null,
+            isp: data.org || 'Unknown'
+          };
+        }
+      } catch (e) {
+        console.warn('ipinfo.io failed too');
+      }
+
+      // Final fallback: return timezone from browser
       return {
-        ip_address: data.query || 'Unknown',
-        country: data.country || 'Unknown',
-        region: data.regionName || 'Unknown',
-        city: data.city || 'Unknown',
-        timezone: data.timezone || 'Unknown',
-        latitude: data.lat || null,
-        longitude: data.lon || null,
-        isp: data.isp || 'Unknown'
+        ip_address: 'Not Detected',
+        country: 'Not Detected',
+        region: 'Not Detected',
+        city: 'Not Detected',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+        latitude: null,
+        longitude: null,
+        isp: 'Not Detected'
       };
     } catch (error) {
-      console.warn('Location detection failed, using fallback:', error);
+      console.warn('Location detection completely failed:', error);
       return {
         ip_address: 'Unknown',
         country: 'Unknown',
         region: 'Unknown',
         city: 'Unknown',
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
         latitude: null,
         longitude: null,
         isp: 'Unknown'
@@ -930,7 +1240,6 @@ class PageTracker {
 
   async sendToSupabase(data) {
     try {
-      // Remove any undefined or null values
       const cleanData = Object.fromEntries(
         Object.entries(data).filter(([_, v]) => v !== undefined && v !== null)
       );
@@ -964,13 +1273,15 @@ class PageTracker {
     try {
       const deviceInfo = this.getDeviceInfo();
       const locationInfo = await this.getLocationInfo();
+      const istNow = this.getISTTimestamp();
       
       const trackingData = {
-        visit_timestamp: new Date().toISOString(),
-        session_id: this.sessionId, // Now this is a proper UUID
+        // ===== FIX: Use IST timestamp =====
+        visit_timestamp: istNow,
+        session_id: this.sessionId,
         visit_number: this.visitCount,
         
-        // Location info
+        // Location info (now properly populated)
         ip_address: locationInfo.ip_address,
         country: locationInfo.country,
         region: locationInfo.region,
@@ -980,9 +1291,10 @@ class PageTracker {
         longitude: locationInfo.longitude,
         isp: locationInfo.isp,
         
-        // Device info
+        // Device info (now includes device_model)
         user_agent: deviceInfo.user_agent,
         device_type: deviceInfo.device_type,
+        device_model: deviceInfo.device_model,
         os_name: deviceInfo.os_name,
         os_version: deviceInfo.os_version,
         browser_name: deviceInfo.browser_name,
@@ -995,17 +1307,18 @@ class PageTracker {
         referrer_url: document.referrer || 'Direct',
         language: navigator.language || 'Unknown',
         
-        // Track first and last visit
-        first_visit: this.visitCount === 1 ? new Date().toISOString() : null,
-        last_visit: new Date().toISOString()
+        // ===== FIX: Proper first_visit =====
+        first_visit: this.firstVisit,
+        last_visit: istNow,
+        
+        // Track time on page (will be updated)
+        time_on_page: null,
+        scroll_depth: null,
+        actions_count: 0
       };
 
-      // Only send if we have the required config
-      if (CONFIG.SUPABASE_URL && CONFIG.SUPABASE_ANON_KEY && CONFIG.SUPABASE_ANON_KEY !== 'YOUR_ACTUAL_ANON_KEY_HERE') {
-        await this.sendToSupabase(trackingData);
-      } else {
-        console.warn('⚠️ Supabase credentials not configured properly. Data:', trackingData);
-      }
+      // Send to Supabase
+      await this.sendToSupabase(trackingData);
       
       return trackingData;
     } catch (error) {
